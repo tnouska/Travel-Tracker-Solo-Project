@@ -6,13 +6,13 @@ const Nav = () => (
     <div>
       <ul>
         <li>
-          <Link to="/map">
-            Map Page
+          <Link to="/track">
+            Tracks
           </Link>
         </li>
         <li>
-          <Link to="/track">
-            Track Page
+          <Link to="/map">
+            Map
           </Link>
         </li>
       </ul>
