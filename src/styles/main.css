@@ -5,10 +5,11 @@ body {
 .instructions h1 {
     font-size: 24px;
     font-weight: 700;
+    text-align: center;
 }
 
 .instructions {
-    background-color: #00acb0;
+    background-color: #3f5734;
     padding: 5px;
     color: #ece7e7;
 }
@@ -48,7 +49,7 @@ input[type="submit"] {
 }
 
 .navbar {
-  background-color: #00acb0;
+  background-color: #3f5734;
   width: 100%;
   border-radius: 0px;
 }
@@ -77,4 +78,7 @@ li a {
 li a:hover {
     text-decoration: underline;
     color: #eee;
+}
+.splashPage {
+    align-content: center
 }

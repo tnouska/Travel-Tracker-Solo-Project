@@ -16,22 +16,21 @@ CREATE TABLE "track"
 CREATE TABLE "waypoint"
 (
     "id" serial NOT NULL PRIMARY KEY,
-    "latitude" DECIMAL(20,10) NOT NULL,
-    "longitude" DECIMAL(20,10) NOT NULL,
+    "latitude" DECIMAL NOT NULL,
+    "longitude" DECIMAL NOT NULL,
     "description" varchar(1000),
     "img_url" varchar(1000),
-    "elevation" DECIMAL(20,10),
-    "is_expanded" BOOLEAN DEFAULT 'false',
-    "date" VARCHAR(200),
+    "elevation" DECIMAL,
+    "time" VARCHAR(200),
     "track_id" INT REFERENCES "track",
 );
 
 CREATE TABLE "trackpoint"
 (
     "id" serial NOT NULL PRIMARY KEY,
-    "latitude" DECIMAL(20,10) NOT NULL,
-    "longitude" DECIMAL(20,10) NOT NULL,
-    "elevation" DECIMAL(20,10),
-    "date" VARCHAR(200) NOT NULL,
+    "latitude" DECIMAL NOT NULL,
+    "longitude" DECIMAL NOT NULL,
+    "elevation" DECIMAL,
+    "time" VARCHAR(200) NOT NULL,
     "track_id" INT REFERENCES "track",
 );

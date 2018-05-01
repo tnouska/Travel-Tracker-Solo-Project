@@ -28,12 +28,11 @@ class RegisterPage extends Component {
           password: this.state.password,
         }),
       });
-
       // making the request to the server to post the country
       fetch(request)
         .then((response) => {
           if (response.status === 201) {
-            this.props.history.push('/home');
+            this.props.history.push('/login');
           } else {
             this.setState({
               message: 'Ooops! That didn\'t work. The username might already be taken. Try again!',
@@ -102,7 +101,7 @@ class RegisterPage extends Component {
               name="submit"
               value="Register"
             />
-            <Link to="/home">Cancel</Link>
+            <Link to="/login">Cancel</Link>
           </div>
         </form>
       </div>
