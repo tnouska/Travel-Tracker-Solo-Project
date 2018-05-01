@@ -11,6 +11,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import TrackPage from './components/TrackPage/TrackPage';
 import MapPage from './components/MapPage/MapPage';
+import SplashScreen from './components/SplashScreen/SplashScreen'
 
 import './styles/main.css';
 
@@ -19,7 +20,7 @@ const App = () => (
     <Header title="Travel Tracker" />
     <Router>
       <Switch>
-        <Redirect exact from="/" to="/login" />
+        <Redirect exact from="/" to="/home" />
         <Route
           path="/login"
           component={LoginPage}
@@ -35,6 +36,10 @@ const App = () => (
         <Route
           path="/map"
           component={MapPage}
+        />
+        <Route
+          path="/home"
+          component={SplashScreen}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />

@@ -6,9 +6,6 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import { triggerLogout } from '../../redux/actions/loginActions';
 
-const mapStateToProps = state => ({
-  user: state.user,
-});
 
 class MapPage extends Component {
   componentDidMount() {
@@ -52,5 +49,8 @@ class MapPage extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.user,
+});
 // this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(MapPage);
