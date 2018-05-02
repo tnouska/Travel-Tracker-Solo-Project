@@ -12,6 +12,7 @@ import xml2js from 'xml2js'
 const parseString = xml2js.parseString;
 const mapStateToProps = state => ({
   user: state.user,
+  state
 });
 
 
@@ -24,6 +25,7 @@ class TrackPage extends Component {
   }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    this.props.dispatch({ type: 'GET_TRACK'})
   }
 
   componentDidUpdate() {
@@ -46,10 +48,10 @@ class TrackPage extends Component {
           console.log('error on parseString TrackPage.js', error);
         } else {
           console.log(result);
-          // this.props.dispatch({
-          //   type: 'POST_FILE',
-          //   payload: result
-          // });//end dispatch to post uploaded track file
+          this.props.dispatch({
+            type: 'POST_TRACK',
+            payload: result
+          });//end dispatch to post uploaded track file
         };//end if/else statement
       });//end parseString function
     };//end reader.onload
@@ -62,9 +64,12 @@ class TrackPage extends Component {
 
   render() {
     let content = null;
-    // let fileContent = null;
+    let trackTableContent = this.props.state.track.allTracks.map((track)=>{
+      return (<tr key={track.date}><td>{track.date}</td></tr>)
+    })
+    
     // if(this.state.textFile) {
-    //   fileContent = this.state.textFile.gpx.wpt.map((waypoint)=>{
+    //   trackTableContent = this.state.((waypoint)=>{
     //     return (<tr key={waypoint.name}><td>{waypoint.name}</td><td>{waypoint._lat}</td><td>{waypoint._lon}</td></tr>) 
     //   })
 
@@ -96,6 +101,11 @@ class TrackPage extends Component {
           >
             Log Out
           </button>
+          <table>
+            <tbody>
+            {trackTableContent}
+            </tbody>
+            </table>
         </div>
       );
     }
