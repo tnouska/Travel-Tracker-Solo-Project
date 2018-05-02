@@ -26,7 +26,8 @@
     "react-scripts": "^1.1.1",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "xml2js": "^0.4.19"
   },
   "scripts": {
     "start": "react-scripts build && node server/server.js",
