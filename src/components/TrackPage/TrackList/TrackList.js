@@ -63,9 +63,12 @@ class TrackList extends Component {
     };//end handleSubmit
 
     handleMapPageChange = () => {
+        this.props.dispatch({
+            type: 'SET_CURRENT_MAP',
+            payload: this.props.track.id
+        });//end dispatch to send selected map into redux
         this.props.history.push('/map')
-        
-    }
+    };//end handleMapPageChange
 
     showListItem = () => {
         let trackStart = moment(this.props.track.date).format("YYYY-MM-DD")
