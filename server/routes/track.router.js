@@ -5,12 +5,12 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        let queryText = 'SELECT * FROM "track";';
+        let queryText = 'SELECT * FROM "track" ORDER BY id ASC;';
         pool.query(queryText).then((result) => {
             res.send(result.rows);
         })
             .catch((error) => {
-                console.log(error);
+                console.log('error in track.router.get',error);
                 res.sendStatus(500);
             });
     } else {
@@ -60,7 +60,7 @@ if (req.isAuthenticated()) {
 
 router.delete('/:id', (req,res)=>{
     if (req.isAuthenticated()) {
-        let queryText = 'DELETE FROM tracks WHERE id = $1 AND person_id = $2';
+        let queryText = 'DELETE FROM track WHERE id = $1 AND person_id = $2';
         pool.query(queryText,[req.params.id,req.user.id])
         .then((result)=>{
             if (result.rowCount === 0) {

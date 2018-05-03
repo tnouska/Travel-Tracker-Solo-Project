@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 class TrackListDelete extends Component {
 
-    deleteTrack = () => {
+    deleteTrack = () => {        
         this.props.dispatch({
             type: 'DELETE_TRACK',
             payload: { 

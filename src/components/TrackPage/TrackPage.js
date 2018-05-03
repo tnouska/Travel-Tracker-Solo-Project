@@ -27,6 +27,7 @@ class TrackPage extends Component {
   }
 
   componentDidUpdate() {
+      
     if (!this.props.user.isLoading && this.props.user.userName === null) {
       this.props.history.push('login');
     }
@@ -45,7 +46,6 @@ class TrackPage extends Component {
         if (error) {
           console.log('error on parseString TrackPage.js', error);
         } else {
-          console.log(result);
           this.props.dispatch({
             type: 'POST_TRACK',
             payload: result
@@ -92,7 +92,17 @@ class TrackPage extends Component {
           >
             Log Out
           </button>
-          {trackTableContent}
+          <table>
+            <thead>
+              <tr>
+                <th>Track Name</th>
+                <th>Track Start Date</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+              {trackTableContent}
+          </table>
         </div>
       );
     } else {

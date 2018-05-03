@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TrackListDelete from './TrackListDelete/TrackListDelete'
+import IconButton from 'material-ui/IconButton';
+import { Edit } from '@material-ui/icons'
+import { Check } from '@material-ui/icons'
+import { Close } from '@material-ui/icons'
+import { Map } from "@material-ui/icons";
+import moment from 'moment'
+import TextField from 'material-ui/TextField';
+import { withRouter } from "react-router-dom";
+
 
 
 
@@ -11,26 +20,13 @@ class TrackList extends Component {
             isEditing: false,
             name: '',
             date: '',
-        }
+        };//end this.state
     };//end constructor
-
-    // componentDidMount(){
-    //     this.props.dispatch({ type: 'GET_TRACK' })
-    // };//end componentDidMount
-
-    handleClick = () => {
-        console.log('clicked ', this.state.track);
-        this.props.dispatch({
-            type: 'DELETE_TRACK',
-            payload: this.props.track
-        });//end dispatch to saga
-    };//end handleClick function
 
     handleClickEdit = () => {
         this.setState({
-            isEditing: true
+            isEditing: !this.state.isEditing
         });//end setState
-        console.log('editing? ', this.state.isEditing);
     };//end handleClickEdit
 
     handleChangeFor = (type) => {
@@ -39,46 +35,68 @@ class TrackList extends Component {
                 ...this.state,
                 [type]: event.target.value
             });//end setState
-            console.log(this.state);
         };//end return
     };//end handleChangeFor
 
     handleSubmit = () => {
+        if (!this.state.name) {
+            this.setState({
+                name: this.props.track.name
+            });//end setState
+        } else {
+            console.log('0');
+        }
+        if (!this.state.date) {
+            this.setState({
+                date: this.props.track.date
+            });//end setState
+        } else {
+            console.log('1');
+        }
         this.props.dispatch({
             type: 'EDIT_TRACK',
             payload: { name: this.state.name, date: this.state.date, id: this.props.track.id, person_id: this.props.track.person_id }
-        })
+        });//end .dispatch to edit track info
         this.setState({
             isEditing: false
-        })
+        });//end setState
+    };//end handleSubmit
+
+    handleMapPageChange = () => {
+        this.props.history.push('/map')
+        
     }
 
     showListItem = () => {
+        let trackStart = moment(this.props.track.date).format("YYYY-MM-DD")
+        let trackName = this.props.track.name
         if (this.state.isEditing) {
             return (
                 <tr>
-                    <td><input type="text" placeholder={this.props.track.name} onChange={this.handleChangeFor("name")} /></td>
-                    <td><input type="date"  placeholder={this.props.track.date} onChange={this.handleChangeFor("date")} /></td>
-                    <td><button onClick={this.handleSubmit}>submit</button></td>
+                    <td><TextField type="text" defaultValue={trackName} onChange={this.handleChangeFor("name")} /></td>
+                    <td><TextField type="date" defaultValue={trackStart} onChange={this.handleChangeFor("date")} /></td>
+                    <td><IconButton onClick={this.handleSubmit}><Check/></IconButton></td>
+                    <td><IconButton onClick={this.handleClickEdit}><Close/></IconButton></td>
                 </tr>
             );
         } else {
             return (
-                <tr><td>{this.props.track.name}</td><td>{this.props.track.date}</td><td><TrackListDelete id={this.props.track.id}/></td></tr>
-            )
-        }
-    }
+                <tr>
+                    <td>{this.props.track.name}</td>
+                    <td>{trackStart}</td>
+                    <td><TrackListDelete id={this.props.track.id}/></td>
+                    <td><IconButton onClick={this.handleClickEdit}><Edit/></IconButton></td>
+                    <td><IconButton onClick={this.handleMapPageChange}><Map /></IconButton></td>
+                    </tr>
+            );//end return
+        }//end if/else
+    };// end showListItem function
 
-    render(){
-        console.log('this.props', this.props);
-        
-
+    render(){      
         return (
-            <table>
-                <tbody>
-                    {this.showListItem()}
-                </tbody>
-            </table>
+            <tbody>
+                {this.showListItem()}
+            </tbody>
         );//end return
     };//end render
 };//end classTrackList
@@ -89,5 +107,7 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps)(TrackList);
+const trackListWithRouter = withRouter(TrackList)
+
+export default connect(mapStateToProps)(trackListWithRouter);
 
