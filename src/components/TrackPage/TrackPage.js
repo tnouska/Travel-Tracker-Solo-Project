@@ -6,14 +6,11 @@ import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 import xml2js from 'xml2js'
+import TrackList from './TrackList/TrackList'
 
 
 
 const parseString = xml2js.parseString;
-const mapStateToProps = state => ({
-  user: state.user,
-  state
-});
 
 
 class TrackPage extends Component {
@@ -21,11 +18,12 @@ class TrackPage extends Component {
     super(props);
     this.state = {
       textFile: undefined,
+      selectedTrack: 0
     }
   }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch({ type: 'GET_TRACK'})
+    this.props.dispatch({ type: 'GET_TRACK' })
   }
 
   componentDidUpdate() {
@@ -65,15 +63,8 @@ class TrackPage extends Component {
   render() {
     let content = null;
     let trackTableContent = this.props.state.track.allTracks.map((track)=>{
-      return (<tr key={track.date}><td>{track.date}</td></tr>)
-    })
-    
-    // if(this.state.textFile) {
-    //   trackTableContent = this.state.((waypoint)=>{
-    //     return (<tr key={waypoint.name}><td>{waypoint.name}</td><td>{waypoint._lat}</td><td>{waypoint._lon}</td></tr>) 
-    //   })
-
-    // }
+      return (<TrackList key={track.id} track={track}/>)
+    });//end .map of tracklist
 
     if (this.props.user.userName) {
       content = (
@@ -101,31 +92,27 @@ class TrackPage extends Component {
           >
             Log Out
           </button>
-          <table>
-            <tbody>
-            {trackTableContent}
-            </tbody>
-            </table>
+          {trackTableContent}
         </div>
       );
-    }
+    } else {
+      content = null
+    };//end if/else
 
     return (
       <div>
         <Nav />
         { content }
-        {/* <table>
-          <thead>
-            <tr><th>name</th><th>lat</th><th>lon</th></tr>
-            </thead>
-          <tbody>
-          {fileContent}
-          </tbody>
-        </table> */}
       </div>
-    );
-  }
-}
+    );//end return
+  };//end render
+};//end class
+
+const mapStateToProps = state => ({
+  user: state.user,
+  state
+});
+
 
 // this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(TrackPage);
