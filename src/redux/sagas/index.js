@@ -2,7 +2,9 @@ import { all } from 'redux-saga/effects';
 import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import trackSaga from './trackSaga';
-import waypointSaga from  './waypointSaga'
+import waypointSaga from  './waypointSaga';
+import mapSaga from './mapSaga'
+
 
 
 export default function* rootSaga() {
@@ -11,5 +13,6 @@ export default function* rootSaga() {
     loginSaga(),
     trackSaga(),
     waypointSaga(),
+    mapSaga(),
   ]);
 }

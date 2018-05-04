@@ -19,6 +19,8 @@ class MapPage extends Component {
 
   componentDidMount() {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
+    console.log(this.props.user);
+    this.props.dispatch({type: 'GET_TRACKPOINT',payload: this.props.state.currentMap.currentMapId})
   };//end componentDidMount
 
   componentDidUpdate() {

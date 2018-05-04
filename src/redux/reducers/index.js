@@ -10,7 +10,7 @@ const store = combineReducers({
   login,
   track,
   waypoint,
-  currentMap,
+  currentMap
 });
 
 export default store;

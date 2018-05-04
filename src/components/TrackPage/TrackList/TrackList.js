@@ -64,7 +64,7 @@ class TrackList extends Component {
 
     handleMapPageChange = () => {
         this.props.dispatch({
-            type: 'SET_CURRENT_MAP',
+            type: 'SET_CURRENT_MAP_ID',
             payload: this.props.track.id
         });//end dispatch to send selected map into redux
         this.props.history.push('/map')
