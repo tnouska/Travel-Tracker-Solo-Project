@@ -49,7 +49,7 @@ class MapPage extends Component {
         } else {
           this.props.dispatch({
             type: 'POST_WAYPOINT',
-            payload: result
+            payload: { waypoint: result, track: this.props.state.currentMap.currentMapId}
           });//end dispatch to post uploaded Waypoint file
         };//end if/else statement
       });//end parseString function
