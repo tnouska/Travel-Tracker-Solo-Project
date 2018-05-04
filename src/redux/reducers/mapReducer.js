@@ -6,9 +6,8 @@ const currentMap = (state = [],action) => {
             return action.payload;
         default:
             return state;
-    };//end switch for looking for 'SET_CURRENT_MAP'
+    }//end switch for looking for 'SET_CURRENT_MAP'
 };// end currentMap reducer
-
 
 export default combineReducers({
     currentMap

@@ -11,7 +11,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const trackRouter = require('./routes/track.router')
-
+const waypointRouter = require('./routes/waypoint.router')
 // Body parser middleware
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
@@ -26,6 +26,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/track', trackRouter);
+app.use('/api/waypoint', waypointRouter)
 
 // Serve static files
 app.use(express.static('build'));
