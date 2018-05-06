@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        let queryText = 'SELECT * FROM "track" ORDER BY id ASC;';
-        pool.query(queryText).then((result) => {
+        let queryText = 'SELECT * FROM "track" WHERE person_id = $1 ORDER BY id ASC;';
+        pool.query(queryText, [req.user.id]).then((result) => {
             res.send(result.rows);
         })
             .catch((error) => {
@@ -34,8 +34,8 @@ if (req.isAuthenticated()) {
                         const trackId = trackResult.rows[0].id
                         let trackArray = track.trkseg[0].trkpt
                         for (let t = 0; t < trackArray.length; t++) {
-                            let newQueryText = `INSERT INTO trackpoint ("latitude","longitude","elevation","time","track_id") VALUES ($1,$2,$3,$4,$5)`
-                            let trackpointValues = [trackArray[t].$.lat, trackArray[t].$.lon, trackArray[t].ele[0], trackArray[t].time[0],trackId]
+                            let newQueryText = `INSERT INTO trackpoint ("latitude","longitude","elevation","time","track_id","person_id") VALUES ($1,$2,$3,$4,$5,$6)`
+                            let trackpointValues = [trackArray[t].$.lat, trackArray[t].$.lon, trackArray[t].ele[0], trackArray[t].time[0],trackId,req.user.id]
                             const trackPointResult = await client.query(newQueryText, trackpointValues);//posting to DB
                         };//end for loop to add each point of a track to the trackpoint table tying the ID from the track created in query before.
                     };//end for loop to create a track and then run another for loop to add trackpoints tied to that track

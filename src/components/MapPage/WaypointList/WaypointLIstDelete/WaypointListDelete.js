@@ -4,25 +4,25 @@ import { Delete } from '@material-ui/icons'
 import { connect } from 'react-redux';
 
 
-class TrackListDelete extends Component {
+class WaypointListDelete extends Component {
 
-    deleteTrack = () => {        
+    deleteWaypoint = () => {
         this.props.dispatch({
-            type: 'DELETE_TRACK',
-            payload: { 
+            type: 'DELETE_WAYPOINT',
+            payload: {
                 id: this.props.id
             }//end payload
         });//end dispatch to rootSaga
-    };//end deleteTrack function
+    };//end deleteWaypoint function
 
     render() {
         return (
-            <IconButton onClick={this.deleteTrack}><Delete /></IconButton>
+            <IconButton onClick={this.deleteWaypoint}><Delete /></IconButton>
         );//end return
     };//end render 
-};//end TrackListDelete Class
+};//end WaypointListDelete Class
 
 const mapStateToProps = state => ({
     state,
 });
-export default connect(mapStateToProps)(TrackListDelete);
+export default connect(mapStateToProps)(WaypointListDelete);

@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
-const allTracks = (state=[],action) => {
+const trackWaypoint = (state = [], action) => {
     switch (action.type) {
-        case 'SET_TRACK': 
+        case 'SET_WAYPOINT':
             return action.payload;
         default:
             return state;
     }//end switch statement
-};//end allTracks reducer
+};//end trackWaypoint reducer
 
 export default combineReducers({
-    allTracks
+    trackWaypoint
 })

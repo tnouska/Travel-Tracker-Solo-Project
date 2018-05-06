@@ -64,7 +64,7 @@ class TrackList extends Component {
 
     handleMapPageChange = () => {
         this.props.dispatch({
-            type: 'SET_CURRENT_MAP',
+            type: 'SET_CURRENT_MAP_ID',
             payload: this.props.track.id
         });//end dispatch to send selected map into redux
         this.props.history.push('/map')
@@ -86,7 +86,7 @@ class TrackList extends Component {
             return (
                 <tr>
                     <td>{this.props.track.name}</td>
-                    <td>{trackStart}</td>
+                    <td>{moment(trackStart).format("MM/DD/YYYY")}</td>
                     <td><TrackListDelete id={this.props.track.id}/></td>
                     <td><IconButton onClick={this.handleClickEdit}><Edit/></IconButton></td>
                     <td><IconButton onClick={this.handleMapPageChange}><Map /></IconButton></td>
