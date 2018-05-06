@@ -7,7 +7,7 @@ function* getWaypoint(action){
         withCredentials: true,
     };//end config
     try {
-        let waypoint = yield call(axios.get, '/api/waypoint', config)
+        let waypoint = yield call(axios.get, `/api/waypoint/${action.payload}`, config)
         yield put({
             type: 'SET_WAYPOINT',
             payload: waypoint.data
@@ -26,6 +26,7 @@ function* postWaypoint(action){
         yield call(axios.post, '/api/waypoint', action.payload, config)
         yield put({
             type: 'GET_WAYPOINT',
+            payload: action.payload.track
         });//end put to getTrack saga
     } catch (error) {
         console.log('error in postWaypoint', error)

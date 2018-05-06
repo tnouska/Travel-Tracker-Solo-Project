@@ -5,7 +5,8 @@ import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import { triggerLogout } from '../../redux/actions/loginActions';
-import LeafletMap from './LeafletMap/LeafletMap'
+import WaypointList from './WaypointList/WaypointList'
+import MapBox from './MapBox/MapBox'
 import xml2js from 'xml2js'
 const parseString = xml2js.parseString;
 
@@ -21,6 +22,7 @@ class MapPage extends Component {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     console.log(this.props.user);
     this.props.dispatch({type: 'GET_TRACKPOINT',payload: this.props.state.currentMap.currentMapId})
+    this.props.dispatch({type: 'GET_WAYPOINT',payload: this.props.state.currentMap.currentMapId})
   };//end componentDidMount
 
   componentDidUpdate() {
@@ -58,31 +60,33 @@ class MapPage extends Component {
 
   render() {
     let content = null;
+    let WaypointTableContent = this.props.state.waypoint.trackWaypoint.map((waypoint) => {
+      return (<WaypointList key={waypoint.id} waypoint={waypoint} />)
+    });//end .map of tracklist
     if (this.props.user.userName) {
       content = (
         <div>
-          <p>
-            Map Page
-          </p>
+          <p>Map Page</p>
           <form onSubmit={this.handleSubmit}>
             <label>
               Upload file:
-          <input
-                type="file"
-                ref={input => {
-                  this.fileInput = input;
-                }}
-              />
+          <input type="file"accept=".gpx"ref={input => {this.fileInput = input}}/>
             </label>
             <br />
             <button type="submit">Submit</button>
           </form>
-          {/* <LeafletMap/> */}
-          <button
-            onClick={this.logout}
-          >
-            Log Out
-          </button>
+          {/* <LeafletMap /> */}
+          <button onClick={this.logout}>Log Out</button>
+          <table>
+            <thead>
+              <tr>
+                <th>Waypoint number</th>
+                <th>Waypoint Date</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            {WaypointTableContent}
+          </table>
         </div>
       );//end content
     };//end if statement

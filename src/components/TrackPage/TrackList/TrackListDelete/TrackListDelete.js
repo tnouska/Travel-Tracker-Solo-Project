@@ -22,7 +22,7 @@ class TrackListDelete extends Component {
     };//end render 
 };//end TrackListDelete Class
 
-const mapStateToProps = reduxState => ({
-    reduxState,
+const mapStateToProps = state => ({
+    state,
 });
 export default connect(mapStateToProps)(TrackListDelete);

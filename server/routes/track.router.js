@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        let queryText = 'SELECT * FROM "track" ORDER BY id ASC;';
-        pool.query(queryText).then((result) => {
+        let queryText = 'SELECT * FROM "track" WHERE person_id = $1 ORDER BY id ASC;';
+        pool.query(queryText, [req.user.id]).then((result) => {
             res.send(result.rows);
         })
             .catch((error) => {

@@ -86,7 +86,7 @@ class TrackList extends Component {
             return (
                 <tr>
                     <td>{this.props.track.name}</td>
-                    <td>{trackStart}</td>
+                    <td>{moment(trackStart).format("MM/DD/YYYY")}</td>
                     <td><TrackListDelete id={this.props.track.id}/></td>
                     <td><IconButton onClick={this.handleClickEdit}><Edit/></IconButton></td>
                     <td><IconButton onClick={this.handleMapPageChange}><Map /></IconButton></td>

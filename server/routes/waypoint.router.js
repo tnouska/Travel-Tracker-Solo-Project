@@ -36,11 +36,19 @@ router.post('/',(req,res)=>{
     };//end auth if/else
 });//end waypoint router post
 
-router.get('/',(req,res)=>{
+router.get('/:id',(req,res)=>{
     if (req.isAuthenticated()) {
-        let queryText = `SELECT * FROM waypoint WHERE `
-    }
-})
+        let queryText = `SELECT * FROM waypoint WHERE track_id = $1 AND person_id = $2 ORDER BY id ASC;`;
+        pool.query(queryText, [req.params.id,req.user.id]).then((result)=>{
+            res.send(result.rows);
+        }).catch((error)=>{
+            console.log('error in waypoint.router.get: ', error);
+            res.sendStatus(500);
+        });//end pool.query
+    } else {
+        res.sendStatus(403);
+    };//end if/else
+});//end router.get
 
 
 module.exports = router;

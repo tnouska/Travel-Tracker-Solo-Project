@@ -79,6 +79,7 @@ class TrackPage extends Component {
               Upload file:
           <input
                 type="file"
+                accept=".gpx"
                 ref={input => {
                   this.fileInput = input;
                 }}
