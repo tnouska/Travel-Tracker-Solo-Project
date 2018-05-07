@@ -67,6 +67,14 @@ class TrackList extends Component {
             type: 'SET_CURRENT_MAP_ID',
             payload: this.props.track.id
         });//end dispatch to send selected map into redux
+        this.props.dispatch({ 
+            type: 'GET_TRACKPOINT', 
+            payload: this.props.track.id
+        });
+        this.props.dispatch({ 
+            type: 'GET_WAYPOINT', 
+            payload: this.props.track.id
+        });
         this.props.history.push('/map')
     };//end handleMapPageChange
 

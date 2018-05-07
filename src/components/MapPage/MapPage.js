@@ -18,11 +18,13 @@ class MapPage extends Component {
     };//end this.state
   };//end constructor
 
+  componentWillMount(){
+    console.log('mappage compenentWillMount');
+  }
+
   componentDidMount() {
+    console.log('mappage compenentDidMount');
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
-    console.log(this.props.user);
-    this.props.dispatch({type: 'GET_TRACKPOINT',payload: this.props.state.currentMap.currentMapId})
-    this.props.dispatch({type: 'GET_WAYPOINT',payload: this.props.state.currentMap.currentMapId})
   };//end componentDidMount
 
   componentDidUpdate() {
@@ -75,7 +77,8 @@ class MapPage extends Component {
             <br />
             <button type="submit">Submit</button>
           </form>
-          {/* <LeafletMap /> */}
+          <div id='map'></div>
+          <MapBox />
           <button onClick={this.logout}>Log Out</button>
           <table>
             <thead>
@@ -94,6 +97,7 @@ class MapPage extends Component {
     return (
       <div>
         <Nav />
+        <div id="map"></div>
         { content }
       </div>
     );//end return
