@@ -69,28 +69,18 @@ class TrackPage extends Component {
     if (this.props.user.userName) {
       content = (
         <div>
-          <h1
-            id="welcome"
-          >
+          <h1 id="welcome">
             Welcome, { this.props.user.userName }!
           </h1>
           <form onSubmit={this.handleSubmit}>
             <label>
               Upload file:
-          <input
-                type="file"
-                accept=".gpx"
-                ref={input => {
-                  this.fileInput = input;
-                }}
-              />
+          <input type="file"accept=".gpx"ref={input => {this.fileInput = input;}}/>
             </label>
             <br />
             <button type="submit">Submit</button>
           </form>
-          <button
-            onClick={this.logout}
-          >
+          <button onClick={this.logout}>
             Log Out
           </button>
           <table>

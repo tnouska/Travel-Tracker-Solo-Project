@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-
 import { triggerLogout } from '../../redux/actions/loginActions';
 import WaypointList from './WaypointList/WaypointList'
-import MapBox from './MapBox/MapBox'
+import MapContainer from './MapContainer/MapContainer'
 import xml2js from 'xml2js'
+
+
 const parseString = xml2js.parseString;
 
 class MapPage extends Component {
@@ -18,12 +19,7 @@ class MapPage extends Component {
     };//end this.state
   };//end constructor
 
-  componentWillMount(){
-    console.log('mappage compenentWillMount');
-  }
-
   componentDidMount() {
-    console.log('mappage compenentDidMount');
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
   };//end componentDidMount
 
@@ -61,13 +57,15 @@ class MapPage extends Component {
   };//end handleSubmit function
 
   render() {
+    console.log('render inside MapPage');
+    
     let content = null;
     let WaypointTableContent = this.props.state.waypoint.trackWaypoint.map((waypoint) => {
       return (<WaypointList key={waypoint.id} waypoint={waypoint} />)
     });//end .map of tracklist
     if (this.props.user.userName) {
       content = (
-        <div>
+        <div className="mapForm">
           <p>Map Page</p>
           <form onSubmit={this.handleSubmit}>
             <label>
@@ -77,8 +75,7 @@ class MapPage extends Component {
             <br />
             <button type="submit">Submit</button>
           </form>
-          <div id='map'></div>
-          <MapBox />
+          <MapContainer />
           <button onClick={this.logout}>Log Out</button>
           <table>
             <thead>
@@ -97,7 +94,6 @@ class MapPage extends Component {
     return (
       <div>
         <Nav />
-        <div id="map"></div>
         { content }
       </div>
     );//end return
