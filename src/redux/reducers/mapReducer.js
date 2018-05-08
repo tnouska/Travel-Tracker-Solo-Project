@@ -9,14 +9,14 @@ const currentMapId = (state = [],action) => {
     }//end switch for looking for 'SET_CURRENT_MAP_ID'
 };// end currentMap reducer
 
-const allTrackpoint = (state = [0,0], action) => {
+const allTrackpoint = (state = [{lat: 0, lng: 0}], action) => {
     switch (action.type) {
         case 'SET_TRACKPOINT':
             let allCoordinates = [];
             let eachPoint = action.payload.map((point)=>{                
-                allCoordinates.push([Number(point.longitude), Number(point.latitude)])                
+                allCoordinates.push({lat: Number(point.latitude), lng: Number(point.longitude)})
             })
-            return allCoordinates;
+            return allCoordinates; 
         default:
             return state;
     }//end switch looking for 'SET_TRACKPOINT'
