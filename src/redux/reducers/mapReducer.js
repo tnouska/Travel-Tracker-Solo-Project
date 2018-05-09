@@ -13,8 +13,9 @@ const allTrackpoint = (state = [{lat: 0, lng: 0}], action) => {
     switch (action.type) {
         case 'SET_TRACKPOINT':
             let allCoordinates = [];
-            let eachPoint = action.payload.map((point)=>{                
+            action.payload.map((point)=>{                
                 allCoordinates.push({lat: Number(point.latitude), lng: Number(point.longitude)})
+                return null
             })
             return allCoordinates; 
         default:

@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
 import WaypointList from './WaypointList/WaypointList'
 import MapContainer from './MapContainer/MapContainer'
 import xml2js from 'xml2js'
+// import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
 
 
 const parseString = xml2js.parseString;
@@ -29,10 +30,6 @@ class MapPage extends Component {
     }//end if
   };//end componentDidUpdate
 
-  logout = () => {
-    this.props.dispatch(triggerLogout());
-    // this.props.history.push('home');
-  };//end logout function
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -70,13 +67,13 @@ class MapPage extends Component {
           <form onSubmit={this.handleSubmit}>
             <label>
               Upload file:
+          
           <input type="file"accept=".gpx"ref={input => {this.fileInput = input}}/>
             </label>
             <br />
             <button type="submit">Submit</button>
           </form>
           <MapContainer />
-          <button onClick={this.logout}>Log Out</button>
           <table>
             <thead>
               <tr>
@@ -94,7 +91,9 @@ class MapPage extends Component {
     return (
       <div>
         <Nav />
-        { content }
+        <Grid>
+          { content }
+        </Grid>
       </div>
     );//end return
   };//end render

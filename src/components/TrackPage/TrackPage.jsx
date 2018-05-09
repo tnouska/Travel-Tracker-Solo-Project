@@ -4,9 +4,15 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
 import xml2js from 'xml2js'
 import TrackList from './TrackList/TrackList'
+import Button from 'material-ui/Button'
+// import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
+// import {FileUpload} from '@material-ui/icons'
+// import IconButton from 'material-ui/IconButton';
+// import Tooltip from 'material-ui/Tooltip'
+
 
 
 
@@ -18,7 +24,7 @@ class TrackPage extends Component {
     super(props);
     this.state = {
       textFile: undefined,
-      selectedTrack: 0
+      selectedTrack: 0,
     }
   }
   componentDidMount() {
@@ -27,7 +33,6 @@ class TrackPage extends Component {
   }
 
   componentDidUpdate() {
-      
     if (!this.props.user.isLoading && this.props.user.userName === null) {
       this.props.history.push('login');
     }
@@ -55,10 +60,7 @@ class TrackPage extends Component {
     };//end reader.onload
   };//end handleSubmit function
 
-  logout = () => {
-    this.props.dispatch(triggerLogout());
-    // this.props.history.push('home');
-  }
+
 
   render() {
     let content = null;
@@ -68,21 +70,23 @@ class TrackPage extends Component {
 
     if (this.props.user.userName) {
       content = (
-        <div>
+      <Grid container>
+        <Grid item md={12}>
           <h1 id="welcome">
             Welcome, { this.props.user.userName }!
           </h1>
+        <Grid/>
+        <Grid item md={12}>
           <form onSubmit={this.handleSubmit}>
             <label>
-              Upload file:
-          <input type="file"accept=".gpx"ref={input => {this.fileInput = input;}}/>
+              Upload .gpx file to get access to:
+              <input type="file"accept=".gpx"ref={input => {this.fileInput = input;}}/>
             </label>
             <br />
-            <button type="submit">Submit</button>
+            <Button type="submit">Submit</Button>
           </form>
-          <button onClick={this.logout}>
-            Log Out
-          </button>
+        </Grid>
+        <Grid item md={12}>
           <table>
             <thead>
               <tr>
@@ -94,7 +98,9 @@ class TrackPage extends Component {
             </thead>
               {trackTableContent}
           </table>
-        </div>
+        </Grid>
+        </Grid>
+      </Grid>
       );
     } else {
       content = null
@@ -103,7 +109,7 @@ class TrackPage extends Component {
     return (
       <div>
         <Nav />
-        { content }
+          { content }
       </div>
     );//end return
   };//end render

@@ -12,7 +12,9 @@ function* getTrackpoint(action) {
             type: 'SET_TRACKPOINT',
             payload: trackpoint.data
         });//end put to getTrackpoint reducer
-        
+        yield put({
+            type: 'FINISH_TRACKPOINT'
+        });//end put to getTrackpoint reducer
     } catch (error) {
         console.log('error in getTrackpoint: ', error);
     };//end try/catch

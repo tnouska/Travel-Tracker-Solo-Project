@@ -3,15 +3,25 @@ import { connect } from 'react-redux';
 import { Map, InfoWindow, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
 
 export class MapContainer extends Component {
-    state = {
-        showingInfoWindow: false,
-        activeMarker: {},
-        selectedPlace: {},
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            showingInfoWindow: false,
+            activeMarker: {},
+            selectedPlace: {},
+        };
+        this.bounds = {};
+    }
 
-    onMarkerClick = (props, marker, e) =>{
-        console.log('marker', marker);
-        
+    componentWillReceiveProps(nextProps) {
+        this.bounds = new this.props.google.maps.LatLngBounds();
+        for (let i = 0; i < nextProps.state.currentMap.allTrackpoint.length; i++) {
+            this.bounds.extend(nextProps.state.currentMap.allTrackpoint[i]);
+        }
+        return true;
+    }
+
+    onMarkerClick = (props, marker, e) =>{        
         this.setState({
             selectedPlace: props,
             activeMarker: marker,
@@ -20,7 +30,7 @@ export class MapContainer extends Component {
 
     }
 
-    onMapClicked = (props) => {
+    onMapClicked = (props) => {        
         if (this.state.showingInfoWindow) {
             this.setState({
                 showingInfoWindow: false,
@@ -29,20 +39,12 @@ export class MapContainer extends Component {
         }
     };
 
-    render() {
-        var bounds = new this.props.google.maps.LatLngBounds()
-        for (let i = 0; i < this.props.state.currentMap.allTrackpoint.length; i++) {
-            bounds.extend(this.props.state.currentMap.allTrackpoint[i]);
-            
-        }
-        console.log('render in mapContainer');
-        
+    render() {        
         if (!this.props.loaded) {
             return (
                 <div>Loading...</div>
             )
-        } else {
-            
+        } else { 
             let coordinates = this.props.state.currentMap.allTrackpoint
             let waypoints = this.props.state.waypoint.trackWaypoint.map((item)=>{
                 return (<Marker
@@ -52,15 +54,17 @@ export class MapContainer extends Component {
                     name={item.id}
                     position={{ lat: Number(item.latitude), lng: Number(item.longitude) }} />)
             })
+            
         return (
         
             <Map 
+            onClick={this.onMapClicked}
             google={this.props.google} 
             zoom={14} 
             className={'map'}
             style={{width: '50%', height: '50%', position: 'relative'}}
             initialCenter={{ lat: this.props.state.currentMap.allTrackpoint[0].lat, lng: this.props.state.currentMap.allTrackpoint[0].lng }}
-            bounds={bounds}
+            bounds={this.bounds}
             >
                 {waypoints}
                 <InfoWindow
