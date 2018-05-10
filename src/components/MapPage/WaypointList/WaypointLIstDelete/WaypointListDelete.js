@@ -11,7 +11,8 @@ class WaypointListDelete extends Component {
         this.props.dispatch({
             type: 'DELETE_WAYPOINT',
             payload: {
-                id: this.props.id
+                id: this.props.id,
+                track_id: this.props.track_id
             }//end payload
         });//end dispatch to rootSaga
     };//end deleteWaypoint function

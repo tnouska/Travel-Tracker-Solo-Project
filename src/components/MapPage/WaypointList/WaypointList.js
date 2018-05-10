@@ -20,7 +20,6 @@ class WaypointList extends Component {
         this.state = {
             isEditing: false,
             name: '',
-            time: '',
             description: '',
             img_url: ''
         };//end this.state
@@ -81,7 +80,7 @@ class WaypointList extends Component {
                     <td>{this.props.waypoint.id}</td>
                     <td>{this.props.waypoint.description}</td>
                     <td>{moment(waypointStart).format("MM/DD/YYYY")}</td>
-                    <td><WaypointListDelete id={this.props.waypoint.id} /></td>
+                    <td><WaypointListDelete id={this.props.waypoint.id} track_id={this.props.waypoint.track_id} /></td>
                     <td>
                         <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Edit">
                             <IconButton onClick={this.handleClickEdit}><Edit /></IconButton>

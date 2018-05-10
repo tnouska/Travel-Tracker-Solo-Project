@@ -1,6 +1,22 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios'
 
+function* deleteWaypoint(action){
+    const config = {
+        headers: { 'Content-Type': 'application/json'},
+        withCredentials: true,
+    };//end config
+    try {
+        yield call(axios.delete, `/api/waypoint/${action.payload.id}`, config)
+        yield put({
+            type: 'GET_WAYPOINT',
+            payload: action.payload.track_id
+        })
+    } catch (error) {
+        
+    }
+}
+
 function* getWaypoint(action){
     const config = {
         headers: { 'Content-Type': 'application/json' },
@@ -37,6 +53,7 @@ function* postWaypoint(action){
 function* waypointSaga() {
     yield takeEvery('POST_WAYPOINT', postWaypoint)
     yield takeEvery('GET_WAYPOINT', getWaypoint)
+    yield takeEvery('DELETE_WAYPOINT', deleteWaypoint)
 }
 
 export default waypointSaga

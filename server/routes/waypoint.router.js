@@ -50,5 +50,46 @@ router.get('/:id',(req,res)=>{
     };//end if/else
 });//end router.get
 
+router.delete('/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        let queryText = 'DELETE FROM waypoint WHERE id = $1 AND person_id = $2';
+        pool.query(queryText, [req.params.id, req.user.id])
+            .then((result) => {
+                if (result.rowCount === 0) {
+                    res.sendStatus(403);
+                    console.log('cannot delete that item: ', result);
+
+                } else {
+                    res.sendStatus(201);
+                };
+            }).catch((error) => {
+                console.log('error in track.router.delete: ', error);
+                res.sendStatus(500);
+            });//end pool.query to delete by id.
+    } else {
+        res.sendStatus(403);
+    };// end if/else
+});//end waypoint.router.delete;
+
+router.put('/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        let queryText = 'UPDATE waypoint SET name = $1, date = $2 WHERE id = $3 AND person_id = $4';
+        pool.query(queryText, [req.body.name, req.body.date, req.params.id, req.user.id])
+            .then((result) => {
+                if (result.rowCoutn === 0) {
+                    res.sendStatus(403);
+                    console.log('cannot update that item: ', result);
+                } else {
+                    res.sendStatus(201);
+                };//end if/else
+            }).catch((error) => {
+                console.log('error in track.router.put: ', error);
+                res.sendStatus(500);
+            });//end pool.query to update track with new name and date and verify the person name
+    } else {
+        res.sendStatus(403)
+        console.log('not signed in');
+    };//end if/else for authentication
+});//end track.router.put
 
 module.exports = router;

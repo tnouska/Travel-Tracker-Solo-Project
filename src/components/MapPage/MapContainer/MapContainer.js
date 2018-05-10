@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Map, InfoWindow, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
+import { ActionSwapVert } from 'material-ui';
 
 export class MapContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showingInfoWindow: false,
+            showingMarkerInfoWindow: false,
+            showingNewWaypointWindow: false,
             activeMarker: {},
             selectedPlace: {},
         };
@@ -30,20 +32,25 @@ export class MapContainer extends Component {
 
     }
 
-    onMapClicked = (props) => {        
-        if (this.state.showingInfoWindow) {
+    onMapClicked = (props, e) => {   
+        if (this.state.showingMarkerInfoWindow) {
             this.setState({
-                showingInfoWindow: false,
+                showingMarkerInfoWindow: false,
                 activeMarker: null
             })
-        } else {
-
+        // } else if (!this.state.showingNewWaypointWindow){
+            // this.setState({
+            //     selectedPlace: props,
+            //     showingMarkerInfoWindow: true
+            // })
+            // console.log('this.state.selectedPlace: ',this.state.selectedPlace);
+            
         }
+
+        
     };
 
     render() {        
-
-        console.log(this.state.selectedPlace)
         if (!this.props.loaded) {
             return (
                 <div>Loading...</div>
@@ -72,13 +79,14 @@ export class MapContainer extends Component {
             bounds={this.bounds}
             >
                 {waypoints}
-                <InfoWindow
-                    marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}>
+                <InfoWindow marker={this.state.activeMarker}visible={this.state.showingMarkerInfoWindow}>
                     <div>
                         <h1>{this.state.selectedPlace.name}</h1>
                     </div>
                 </InfoWindow>
+                {/* <InfoWindow visible={this.state.showingNewWaypointWindow}>
+
+                </InfoWindow> */}
                 <Polyline 
                     path= { coordinates }
                     strokeColor="#FF0000"
