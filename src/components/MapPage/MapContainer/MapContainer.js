@@ -27,9 +27,10 @@ export class MapContainer extends Component {
         this.setState({
             selectedPlace: props,
             activeMarker: marker,
-            showingInfoWindow: true
+            showingMarkerInfoWindow: true
         });
-
+        console.log('props: selectedPlace: ', this.state.selectedPlace);
+        
     }
 
     onMapClicked = (props, e) => {   
@@ -38,12 +39,12 @@ export class MapContainer extends Component {
                 showingMarkerInfoWindow: false,
                 activeMarker: null
             })
-        // } else if (!this.state.showingNewWaypointWindow){
-            // this.setState({
-            //     selectedPlace: props,
-            //     showingMarkerInfoWindow: true
-            // })
-            // console.log('this.state.selectedPlace: ',this.state.selectedPlace);
+        } else if (!this.state.showingNewWaypointWindow){
+            this.setState({
+                selectedPlace: props,
+                showingNewWaypointWindow: false
+            })
+            console.log('this.state.selectedPlace: ',this.state.selectedPlace);
             
         }
 
@@ -81,12 +82,14 @@ export class MapContainer extends Component {
                 {waypoints}
                 <InfoWindow marker={this.state.activeMarker}visible={this.state.showingMarkerInfoWindow}>
                     <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
+                        <p>Id:{this.state.selectedPlace.name}</p>
+                        <p>{this.state.selectedPlace.title}</p>
+
                     </div>
                 </InfoWindow>
-                {/* <InfoWindow visible={this.state.showingNewWaypointWindow}>
+                <InfoWindow visible={this.state.showingNewWaypointWindow}>
 
-                </InfoWindow> */}
+                </InfoWindow>
                 <Polyline 
                     path= { coordinates }
                     strokeColor="#FF0000"

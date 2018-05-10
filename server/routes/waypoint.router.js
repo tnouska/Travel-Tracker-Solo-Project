@@ -73,8 +73,8 @@ router.delete('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
     if (req.isAuthenticated()) {
-        let queryText = 'UPDATE waypoint SET name = $1, date = $2 WHERE id = $3 AND person_id = $4';
-        pool.query(queryText, [req.body.name, req.body.date, req.params.id, req.user.id])
+        let queryText = 'UPDATE waypoint SET description = $1 WHERE id = $2 AND person_id = $3';
+        pool.query(queryText, [req.body.waypointState.description, req.params.id, req.user.id])
             .then((result) => {
                 if (result.rowCoutn === 0) {
                     res.sendStatus(403);
@@ -83,9 +83,9 @@ router.put('/:id', (req, res) => {
                     res.sendStatus(201);
                 };//end if/else
             }).catch((error) => {
-                console.log('error in track.router.put: ', error);
+                console.log('error in waypoint.router.put: ', error);
                 res.sendStatus(500);
-            });//end pool.query to update track with new name and date and verify the person name
+            });//end pool.query to update waypoint with new description and to verify the person name
     } else {
         res.sendStatus(403)
         console.log('not signed in');

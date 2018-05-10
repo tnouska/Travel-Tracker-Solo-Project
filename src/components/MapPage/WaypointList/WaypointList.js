@@ -19,7 +19,6 @@ class WaypointList extends Component {
         super(props)
         this.state = {
             isEditing: false,
-            name: '',
             description: '',
             img_url: ''
         };//end this.state
@@ -45,8 +44,7 @@ class WaypointList extends Component {
             type: 'EDIT_WAYPOINT',
             payload: { 
                 waypointState: this.state, 
-                id: this.props.waypoint.id, 
-                person_id: this.props.waypoint.person_id
+                waypoint: this.props.waypoint, 
                  }
         });//end .dispatch to edit waypoint info
         this.setState({
@@ -54,14 +52,14 @@ class WaypointList extends Component {
         });//end setState
     };//end handleSubmit
 
-    showListItem = () => {        
-        let waypointStart = moment(this.props.waypoint.time).format("YYYY-MM-DD")        
+    showListItem = () => {
+        let waypointStart = moment(this.props.waypoint.time).format("YYYY-MM-DD, h:mm a")        
         if (this.state.isEditing) {
             return (
                 <tr>
                     <td>{this.props.waypoint.id}</td>
                     <td><TextField type="text" defaultValue={""} onChange={this.handleChangeFor("description")} /></td>
-                    <td><TextField type="date" defaultValue={waypointStart} onChange={this.handleChangeFor("date")} /></td>
+                    <td>{waypointStart}</td>
                     <td>
                         <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Confirm">
                             <IconButton onClick={this.handleSubmit}><Check /></IconButton>
@@ -79,7 +77,7 @@ class WaypointList extends Component {
                 <tr>
                     <td>{this.props.waypoint.id}</td>
                     <td>{this.props.waypoint.description}</td>
-                    <td>{moment(waypointStart).format("MM/DD/YYYY")}</td>
+                    <td>{waypointStart}</td>
                     <td><WaypointListDelete id={this.props.waypoint.id} track_id={this.props.waypoint.track_id} /></td>
                     <td>
                         <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Edit">

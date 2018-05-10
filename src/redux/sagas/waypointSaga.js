@@ -13,9 +13,25 @@ function* deleteWaypoint(action){
             payload: action.payload.track_id
         })
     } catch (error) {
-        
-    }
-}
+        console.log('error in deleteWaypoint: ', error);
+    };//end try/catch
+};//end deleteWaypoint
+
+function* editWaypoint(action){
+    const config = {
+        headers: {'Content-Type': 'application/json'},
+        withCredentials: true,
+    };//end config
+    try {
+        yield call(axios.put, `/api/waypoint/${action.payload.waypoint.id}`, action.payload, config)
+        yield put({
+            type: 'GET_WAYPOINT',
+            payload: action.payload.waypoint.track_id
+        })
+    } catch (error) {
+        console.log('error in editWaypoint: ', error);
+    };//end try/catch
+};//end editWaypoint
 
 function* getWaypoint(action){
     const config = {
@@ -54,6 +70,7 @@ function* waypointSaga() {
     yield takeEvery('POST_WAYPOINT', postWaypoint)
     yield takeEvery('GET_WAYPOINT', getWaypoint)
     yield takeEvery('DELETE_WAYPOINT', deleteWaypoint)
+    yield takeEvery('EDIT_WAYPOINT', editWaypoint)
 }
 
 export default waypointSaga
