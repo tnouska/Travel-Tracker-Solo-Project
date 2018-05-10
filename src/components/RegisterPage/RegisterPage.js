@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import Button from 'material-ui/Button'
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -45,6 +45,10 @@ class RegisterPage extends Component {
           });
         });
     }
+  }
+
+  goToLogInPage = () => {
+    this.props.history.push('/login')
   }
 
   handleInputChangeFor = propertyName => (event) => {
@@ -96,12 +100,8 @@ class RegisterPage extends Component {
             </label>
           </div>
           <div>
-            <input
-              type="submit"
-              name="submit"
-              value="Register"
-            />
-            <Link to="/login">Cancel</Link>
+            <Button type="submit"value="Register">Register</Button>
+            <Button onClick={this.goToLogInPage}>Cancel</Button>
           </div>
         </form>
       </div>

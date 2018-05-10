@@ -9,6 +9,7 @@ import { Map } from "@material-ui/icons";
 import moment from 'moment'
 import TextField from 'material-ui/TextField';
 import { withRouter } from "react-router-dom";
+import Tooltip from 'material-ui/Tooltip'
 
 
 
@@ -86,8 +87,16 @@ class TrackList extends Component {
                 <tr>
                     <td><TextField type="text" defaultValue={trackName} onChange={this.handleChangeFor("name")} /></td>
                     <td><TextField type="date" defaultValue={trackStart} onChange={this.handleChangeFor("date")} /></td>
-                    <td><IconButton onClick={this.handleSubmit}><Check/></IconButton></td>
-                    <td><IconButton onClick={this.handleClickEdit}><Close/></IconButton></td>
+                    <td>
+                        <Tooltip enterDelay={300}id="confirm"leaveDelay={300}placement="bottom"title="Confirm">
+                            <IconButton onClick={this.handleSubmit}><Check/></IconButton>
+                        </Tooltip>
+                    </td>
+                    <td>
+                        <Tooltip enterDelay={300}id="tooltip-controlled"leaveDelay={300}placement="bottom"title="Cancel">
+                            <IconButton onClick={this.handleClickEdit}><Close/></IconButton>
+                        </Tooltip>
+                        </td>
                 </tr>
             );
         } else {
@@ -96,8 +105,16 @@ class TrackList extends Component {
                     <td>{this.props.track.name}</td>
                     <td>{moment(trackStart).format("MM/DD/YYYY")}</td>
                     <td><TrackListDelete id={this.props.track.id}/></td>
-                    <td><IconButton onClick={this.handleClickEdit}><Edit/></IconButton></td>
-                    <td><IconButton onClick={this.handleMapPageChange}><Map /></IconButton></td>
+                    <td>
+                        <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Edit">
+                            <IconButton onClick={this.handleClickEdit}><Edit/></IconButton>
+                        </Tooltip>
+                    </td>
+                    <td>
+                        <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Map of Track">
+                            <IconButton onClick={this.handleMapPageChange}><Map /></IconButton>
+                        </Tooltip>
+                    </td>
                     </tr>
             );//end return
         }//end if/else

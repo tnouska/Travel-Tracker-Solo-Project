@@ -8,6 +8,8 @@ import { Close } from '@material-ui/icons'
 import moment from 'moment'
 import TextField from 'material-ui/TextField';
 import { withRouter } from "react-router-dom";
+import Tooltip from 'material-ui/Tooltip'
+
 
 
 
@@ -54,16 +56,23 @@ class WaypointList extends Component {
     };//end handleSubmit
 
     showListItem = () => {        
-        let waypointStart = moment(this.props.waypoint.time).format("YYYY-MM-DD")
-        let waypointId = this.props.waypoint.id
+        let waypointStart = moment(this.props.waypoint.time).format("YYYY-MM-DD")        
         if (this.state.isEditing) {
             return (
                 <tr>
                     <td>{this.props.waypoint.id}</td>
-                    <td><TextField type="text" defaultValue={waypointId} onChange={this.handleChangeFor("description")} /></td>
+                    <td><TextField type="text" defaultValue={""} onChange={this.handleChangeFor("description")} /></td>
                     <td><TextField type="date" defaultValue={waypointStart} onChange={this.handleChangeFor("date")} /></td>
-                    <td><IconButton onClick={this.handleSubmit}><Check /></IconButton></td>
-                    <td><IconButton onClick={this.handleClickEdit}><Close /></IconButton></td>
+                    <td>
+                        <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Confirm">
+                            <IconButton onClick={this.handleSubmit}><Check /></IconButton>
+                        </Tooltip>
+                    </td>
+                    <td>
+                        <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Cancel">
+                            <IconButton onClick={this.handleClickEdit}><Close /></IconButton>
+                        </Tooltip>
+                    </td>
                 </tr>
             );
         } else {
@@ -72,9 +81,12 @@ class WaypointList extends Component {
                     <td>{this.props.waypoint.id}</td>
                     <td>{this.props.waypoint.description}</td>
                     <td>{moment(waypointStart).format("MM/DD/YYYY")}</td>
-                    <td></td>
                     <td><WaypointListDelete id={this.props.waypoint.id} /></td>
-                    <td><IconButton onClick={this.handleClickEdit}><Edit /></IconButton></td>
+                    <td>
+                        <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Edit">
+                            <IconButton onClick={this.handleClickEdit}><Edit /></IconButton>
+                        </Tooltip>
+                    </td>
                 </tr>
             );//end return
         }//end if/else

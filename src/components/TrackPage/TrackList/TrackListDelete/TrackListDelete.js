@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import IconButton from 'material-ui/IconButton';
 import { Delete } from '@material-ui/icons'
 import { connect } from 'react-redux';
+import Tooltip from 'material-ui/Tooltip'
 
 
 class TrackListDelete extends Component {
@@ -17,7 +18,16 @@ class TrackListDelete extends Component {
 
     render() {
         return (
-            <IconButton onClick={this.deleteTrack}><Delete /></IconButton>
+            
+            <Tooltip
+                enterDelay={300}
+                id="tooltip-controlled"
+                leaveDelay={300}
+                placement="bottom"
+                title="Delete"
+            >
+            <IconButton aria-label="Delete" onClick={this.deleteTrack}><Delete /></IconButton>
+            </Tooltip>
         );//end return
     };//end render 
 };//end TrackListDelete Class

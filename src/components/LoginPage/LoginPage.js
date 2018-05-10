@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
-import Nav from '../../components/Nav/Nav';
+import { triggerLogin, formError, clearError, triggerLogout, } from '../../redux/actions/loginActions';
+
+import Button from 'material-ui/Button'
+
 
 
 const mapStateToProps = state => ({
@@ -22,6 +23,7 @@ class LoginPage extends Component {
 
   componentDidMount() {
     this.props.dispatch(clearError());
+    this.props.dispatch(triggerLogout());
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,6 +47,9 @@ class LoginPage extends Component {
       [propertyName]: event.target.value,
     });
   }
+  goToRegisterPage = () => {
+    this.props.history.push('Register')
+  }
 
   renderAlert() {
     if (this.props.login.message !== '') {
@@ -63,7 +68,6 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <Nav/>
         { this.renderAlert() }
         <form onSubmit={this.login}>
           <h1>Login</h1>
@@ -90,12 +94,8 @@ class LoginPage extends Component {
             </label>
           </div>
           <div>
-            <input
-              type="submit"
-              name="submit"
-              value="Log In"
-            />
-            <Link to="/register">Register</Link>
+            <Button type="submit"name="submit"value="Log In">Submit</Button>
+            <Button onClick={this.goToRegisterPage}>Register</Button>
           </div>
         </form>
       </div>
