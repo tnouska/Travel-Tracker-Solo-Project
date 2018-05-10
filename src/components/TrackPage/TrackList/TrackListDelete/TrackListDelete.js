@@ -18,6 +18,7 @@ class TrackListDelete extends Component {
 
     render() {
         return (
+            
             <Tooltip
                 enterDelay={300}
                 id="tooltip-controlled"

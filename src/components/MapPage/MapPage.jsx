@@ -62,37 +62,50 @@ class MapPage extends Component {
     });//end .map of tracklist
     if (this.props.user.userName) {
       content = (
-        <div className="mapForm">
-          <p>Map Page</p>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Upload file:
-          
-          <input type="file"accept=".gpx"ref={input => {this.fileInput = input}}/>
-            </label>
-            <br />
-            <button type="submit">Submit</button>
-          </form>
-          <MapContainer />
-          <table>
-            <thead>
-              <tr>
-                <th>Waypoint number</th>
-                <th>Waypoint Date</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            {WaypointTableContent}
-          </table>
-        </div>
+        <Grid container direction="row">
+          <Grid item xs="3" zeroMinWidth>
+            <Grid container spacing={0} direction="column">
+              <Grid item xs="3" zeroMinWidth>
+                <p>Map Page</p>
+              </Grid>
+              <Grid item xs="3" zeroMinWidth>
+                <form onSubmit={this.handleSubmit}>
+                  <label>
+                    Upload file:
+                
+                <input type="file"accept=".gpx"ref={input => {this.fileInput = input}}/>
+                  </label>
+                  <br />
+                  <button type="submit">Submit</button>
+                </form>
+              </Grid>
+              <Grid item xs="6" zeroMinWidth>
+                <table id="track">
+                  <thead>
+                    <tr>
+                      <th>Waypoint number</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  {WaypointTableContent}
+                </table>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item lg="12">
+            <MapContainer />
+          </Grid>
+        </Grid>
       );//end content
     };//end if statement
 
     return (
       <div>
         <Nav />
-        <Grid>
-          { content }
+        <Grid container spacing={0}>
+          <Grid item sm={12}>
+            { content }
+          </Grid>
         </Grid>
       </div>
     );//end return

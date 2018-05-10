@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import IconButton from 'material-ui/IconButton';
 import { Delete } from '@material-ui/icons'
 import { connect } from 'react-redux';
+import Tooltip from 'material-ui/Tooltip'
 
 
 class WaypointListDelete extends Component {
@@ -17,7 +18,9 @@ class WaypointListDelete extends Component {
 
     render() {
         return (
+            <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Map of Track">
             <IconButton onClick={this.deleteWaypoint}><Delete /></IconButton>
+            </Tooltip>
         );//end return
     };//end render 
 };//end WaypointListDelete Class

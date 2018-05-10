@@ -6,27 +6,31 @@ import Grid from 'material-ui/Grid'
 const Nav = () => (
   <div className="navbar">
     <div>
-      <Grid container justify="flex-start" alignitems="flex-start">
-        <Grid item>
+      <Grid container justify="space-around" alignitems="center" >
           <ul>
-            <li>
-              <Link to="/track">
-                Tracks
-              </Link>
+            <li id="navTrack">
+              <Grid item xs="3">
+                <Link to="/track">
+                  Tracks
+                </Link>
+              </Grid>
             </li>
-            <li>
-              <Link to="/map">
-                Map
-              </Link>
+            <li id="navMap">
+              <Grid item xs="3">
+                <Link to="/map">
+                  Map
+                </Link>
+              </Grid>
             </li>
-            <li>
-              <Link to="/login">
-                Logout
-              </Link>
+            <li id="navLogin">
+              <Grid item xs="3">
+                <Link to="/login">
+                  Logout
+                </Link>
+              </Grid>
             </li>
           </ul>
         </Grid>
-      </Grid>
     </div>
   </div>
 );

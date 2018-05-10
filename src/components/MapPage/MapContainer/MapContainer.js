@@ -36,10 +36,14 @@ export class MapContainer extends Component {
                 showingInfoWindow: false,
                 activeMarker: null
             })
+        } else {
+
         }
     };
 
     render() {        
+
+        console.log(this.state.selectedPlace)
         if (!this.props.loaded) {
             return (
                 <div>Loading...</div>
@@ -54,6 +58,7 @@ export class MapContainer extends Component {
                     name={item.id}
                     position={{ lat: Number(item.latitude), lng: Number(item.longitude) }} />)
             })
+
             
         return (
         
@@ -62,7 +67,7 @@ export class MapContainer extends Component {
             google={this.props.google} 
             zoom={14} 
             className={'map'}
-            style={{width: '50%', height: '50%', position: 'relative'}}
+                style={{ width: '90vw', height: '75vh', position: 'relative'}}
             initialCenter={{ lat: this.props.state.currentMap.allTrackpoint[0].lat, lng: this.props.state.currentMap.allTrackpoint[0].lng }}
             bounds={this.bounds}
             >

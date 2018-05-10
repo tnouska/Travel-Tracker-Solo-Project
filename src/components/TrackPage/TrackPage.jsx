@@ -87,11 +87,12 @@ class TrackPage extends Component {
           </form>
         </Grid>
         <Grid item md={12}>
-          <table>
+          <table id="track">
             <thead>
               <tr>
                 <th>Track Name</th>
                 <th>Track Start Date</th>
+                <th></th>
                 <th></th>
                 <th></th>
               </tr>
