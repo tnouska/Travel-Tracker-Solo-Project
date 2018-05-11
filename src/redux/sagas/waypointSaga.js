@@ -65,12 +65,26 @@ function* postWaypoint(action){
     };//end try/catch
 };//end postWaypoint function
 
+// function* postWaypointImage(action){
+//     const config = {
+//         headers: {'Content-Type': 'application/json'},
+//         withCredentials: true,
+//     };//end config
+//     try {
+//         yeild call(axios.put, '/api/waypoint/')
+//     } catch (error) {
+        
+//     }
+// }
+
+
 
 function* waypointSaga() {
     yield takeEvery('POST_WAYPOINT', postWaypoint)
     yield takeEvery('GET_WAYPOINT', getWaypoint)
     yield takeEvery('DELETE_WAYPOINT', deleteWaypoint)
     yield takeEvery('EDIT_WAYPOINT', editWaypoint)
+    // yield takeEvery('POST_WAYPOINT_IMAGE', postWaypointImage)
 }
 
 export default waypointSaga

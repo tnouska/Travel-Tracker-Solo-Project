@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Map, InfoWindow, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
-import { ActionSwapVert } from 'material-ui';
+
 
 export class MapContainer extends Component {
     constructor(props) {
@@ -39,12 +39,9 @@ export class MapContainer extends Component {
                 showingMarkerInfoWindow: false,
                 activeMarker: null
             })
-        } else if (!this.state.showingNewWaypointWindow){
-            this.setState({
-                selectedPlace: props,
-                showingNewWaypointWindow: false
-            })
-            console.log('this.state.selectedPlace: ',this.state.selectedPlace);
+        } else {
+
+            console.log('this.state.selectedPlace: ', props, 'error: ', e);
             
         }
 

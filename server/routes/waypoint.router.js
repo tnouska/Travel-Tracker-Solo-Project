@@ -73,8 +73,8 @@ router.delete('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
     if (req.isAuthenticated()) {
-        let queryText = 'UPDATE waypoint SET description = $1 WHERE id = $2 AND person_id = $3';
-        pool.query(queryText, [req.body.waypointState.description, req.params.id, req.user.id])
+        let queryText = 'UPDATE waypoint SET description = $1, img_url = $2 WHERE id = $3 AND person_id = $4';
+        pool.query(queryText, [req.body.waypointState.description, req.body.waypointState.img_url, req.params.id, req.user.id])
             .then((result) => {
                 if (result.rowCoutn === 0) {
                     res.sendStatus(403);

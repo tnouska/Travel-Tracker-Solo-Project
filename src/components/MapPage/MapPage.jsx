@@ -63,23 +63,22 @@ class MapPage extends Component {
     if (this.props.user.userName) {
       content = (
         <Grid container direction="row">
-          <Grid item xs="3" zeroMinWidth>
+          <Grid item xs="12" zeroMinWidth>
             <Grid container spacing={0} direction="column">
-              <Grid item xs="3" zeroMinWidth>
+              <Grid item xs="12" zeroMinWidth>
                 <p>Map Page</p>
               </Grid>
-              <Grid item xs="3" zeroMinWidth>
+              <Grid item xs="12" zeroMinWidth>
                 <form onSubmit={this.handleSubmit}>
                   <label>
                     Upload file:
-                
-                <input type="file"accept=".gpx"ref={input => {this.fileInput = input}}/>
+                    <input type="file"accept=".gpx"ref={input => {this.fileInput = input}}/>
                   </label>
                   <br />
                   <button type="submit">Submit</button>
                 </form>
               </Grid>
-              <Grid item xs="6" zeroMinWidth>
+              <Grid item xs="12" zeroMinWidth>
                 <table id="track">
                   <thead>
                     <tr>
@@ -89,6 +88,7 @@ class MapPage extends Component {
                   </thead>
                   {WaypointTableContent}
                 </table>
+                {/* <MapContainer /> */}
               </Grid>
             </Grid>
           </Grid>

@@ -9,6 +9,7 @@ import moment from 'moment'
 import TextField from 'material-ui/TextField';
 import { withRouter } from "react-router-dom";
 import Tooltip from 'material-ui/Tooltip'
+import ReactFilestack from 'filestack-react';
 
 
 
@@ -19,8 +20,8 @@ class WaypointList extends Component {
         super(props)
         this.state = {
             isEditing: false,
-            description: '',
-            img_url: ''
+            description: this.props.waypoint.description,
+            img_url: this.props.waypoint.img_url
         };//end this.state
     };//end constructor
 
@@ -39,6 +40,12 @@ class WaypointList extends Component {
         };//end return
     };//end handleChangeFor
 
+    handleImageUpload = (result) => {
+        this.setState({
+            img_url: result.filesUploaded[0].url
+        })
+    }
+
     handleSubmit = () => {
         this.props.dispatch({
             type: 'EDIT_WAYPOINT',
@@ -53,13 +60,27 @@ class WaypointList extends Component {
     };//end handleSubmit
 
     showListItem = () => {
-        let waypointStart = moment(this.props.waypoint.time).format("YYYY-MM-DD, h:mm a")        
+        let waypointStart = moment(this.props.waypoint.time).format("YYYY-MM-DD, h:mm a")    
+        const options = {
+            accept: 'image/*',
+            maxFiles: 1,
+            storeTo: {
+                location: 's3',
+            },
+        };    
         if (this.state.isEditing) {
             return (
                 <tr>
                     <td>{this.props.waypoint.id}</td>
                     <td><TextField type="text" defaultValue={""} onChange={this.handleChangeFor("description")} /></td>
                     <td>{waypointStart}</td>
+                    <td><ReactFilestack
+                        apikey={"Ahublo2juRQm8zH7O1rh2z"}
+                        buttonText="Click me"
+                        buttonClass="classname"
+                        options={options}
+                        onSuccess={this.handleImageUpload}
+                    /></td>
                     <td>
                         <Tooltip enterDelay={300} id="tooltip-controlled" leaveDelay={300} placement="bottom" title="Confirm">
                             <IconButton onClick={this.handleSubmit}><Check /></IconButton>
@@ -73,10 +94,15 @@ class WaypointList extends Component {
                 </tr>
             );
         } else {
+            let image = null
+            if (this.props.waypoint.img_url) {
+                image = (<a href={this.props.waypoint.img_url}>Image</a>)
+            } 
             return (
                 <tr>
                     <td>{this.props.waypoint.id}</td>
                     <td>{this.props.waypoint.description}</td>
+                    <td>{image}</td>
                     <td>{waypointStart}</td>
                     <td><WaypointListDelete id={this.props.waypoint.id} track_id={this.props.waypoint.track_id} /></td>
                     <td>
