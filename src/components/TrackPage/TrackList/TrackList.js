@@ -19,8 +19,8 @@ class TrackList extends Component {
         super(props)
         this.state = {
             isEditing: false,
-            name: '',
-            date: '',
+            name: this.props.track.name,
+            date: this.props.track.date,
         };//end this.state
     };//end constructor
 

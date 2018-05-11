@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError, triggerLogout, } from '../../redux/actions/loginActions';
-
+import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 
 
