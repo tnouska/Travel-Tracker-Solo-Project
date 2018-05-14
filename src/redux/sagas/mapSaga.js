@@ -22,6 +22,5 @@ function* getTrackpoint(action) {
 
 function* mapSaga(){
     yield takeEvery('GET_TRACKPOINT',getTrackpoint)
-
-}
+};//end mapSage
 export default mapSaga

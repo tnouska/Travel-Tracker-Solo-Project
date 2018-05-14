@@ -9,16 +9,15 @@ class RegisterPage extends Component {
       username: '',
       password: '',
       message: '',
-    };
-  }
+    };//end this.state
+  };//end constructor
 
   registerUser = (event) => {
     event.preventDefault();
-
     if (this.state.username === '' || this.state.password === '') {
       this.setState({
         message: 'Choose a username and password!',
-      });
+      });//end this.setState
     } else {
       const request = new Request('api/user/register', {
         method: 'POST',
@@ -38,24 +37,24 @@ class RegisterPage extends Component {
               message: 'Ooops! That didn\'t work. The username might already be taken. Try again!',
             });
           }
-        })
+        })//end .then
         .catch(() => {
           this.setState({
             message: 'Ooops! Something went wrong! Is the server running?',
-          });
-        });
-    }
-  }
+          });//end this.setState
+        });//end .catch
+    };//end if/else
+  };//end register user
 
   goToLogInPage = () => {
     this.props.history.push('/login')
-  }
+  };//end goToLogInPage
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
       [propertyName]: event.target.value,
-    });
-  }
+    });//end this.setState
+  };//end handleInputChangeFor
 
   renderAlert() {
     if (this.state.message !== '') {
@@ -69,7 +68,7 @@ class RegisterPage extends Component {
       );
     }
     return (<span />);
-  }
+  };//end renderAlert
 
   render() {
     return (
@@ -105,9 +104,9 @@ class RegisterPage extends Component {
           </div>
         </form>
       </div>
-    );
-  }
-}
+    );//end return
+  }//end render
+}//end class
 
 export default RegisterPage;
 

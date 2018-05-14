@@ -30,7 +30,7 @@ export class MapContainer extends Component {
             showingMarkerInfoWindow: true
         });
         console.log('props: selectedPlace: ', this.state.selectedPlace);
-        
+        console.log('props: activeMarker: ', this.state.activeMarker);
     }
 
     onMapClicked = (props, e) => {   
@@ -40,13 +40,9 @@ export class MapContainer extends Component {
                 activeMarker: null
             })
         } else {
-
             console.log('this.state.selectedPlace: ', props, 'error: ', e);
-            
-        }
-
-        
-    };
+        };//end if/else
+    };//end onMapClicked
 
     render() {        
         if (!this.props.loaded) {
@@ -62,11 +58,9 @@ export class MapContainer extends Component {
                     title={item.description}
                     name={item.id}
                     position={{ lat: Number(item.latitude), lng: Number(item.longitude) }} />)
-            })
+            });//end .map of trackWaypoint
 
-            
         return (
-        
             <Map 
             onClick={this.onMapClicked}
             google={this.props.google} 
@@ -94,9 +88,10 @@ export class MapContainer extends Component {
                     strokeWeight={5}
                 />
             </Map>
-        )}
-    }
-}
+        )//end return
+    };//end if/else
+    };//end render
+};//end class
 const mapStateToProps = state => ({
     user: state.user,
     state

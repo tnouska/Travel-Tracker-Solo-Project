@@ -21,7 +21,6 @@ form {
     /* margin: 20px auto; */
     padding: 25px;
     border-radius: 2px;
-    align-content: center
 }
 
 input {
@@ -104,7 +103,7 @@ li a:hover {
 #track th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
+    text-align: center;
     background-color: #3f5734;
     color: white;
 }

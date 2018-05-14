@@ -6,7 +6,6 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import WaypointList from './WaypointList/WaypointList'
 import MapContainer from './MapContainer/MapContainer'
 import xml2js from 'xml2js'
-// import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 
 
@@ -53,9 +52,7 @@ class MapPage extends Component {
     };//end reader.onload
   };//end handleSubmit function
 
-  render() {
-    console.log('render inside MapPage');
-    
+  render() {    
     let content = null;
     let WaypointTableContent = this.props.state.waypoint.trackWaypoint.map((waypoint) => {
       return (<WaypointList key={waypoint.id} waypoint={waypoint} />)
@@ -88,7 +85,6 @@ class MapPage extends Component {
                   </thead>
                   {WaypointTableContent}
                 </table>
-                {/* <MapContainer /> */}
               </Grid>
             </Grid>
           </Grid>

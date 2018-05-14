@@ -60,7 +60,7 @@ class WaypointList extends Component {
     };//end handleSubmit
 
     showListItem = () => {
-        let waypointStart = moment(this.props.waypoint.time).format("YYYY-MM-DD, h:mm a")    
+        let waypointStart = moment(this.props.waypoint.time).add(5, 'h').format("YYYY-MM-DD, h:mm a")
         const options = {
             accept: 'image/*',
             maxFiles: 1,

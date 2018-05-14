@@ -69,5 +69,5 @@ function* trackSaga(){
     yield takeEvery('GET_TRACK', getTrack)
     yield takeEvery('EDIT_TRACK', editTrack)
     yield takeEvery('DELETE_TRACK', deleteTrack)
-}
+};//end trackSaga
 export default trackSaga;

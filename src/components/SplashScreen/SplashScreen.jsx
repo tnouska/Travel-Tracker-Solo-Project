@@ -11,7 +11,7 @@ class SplashScreen extends Component{
 
 goToLoginPage = () => {
     this.props.history.push('login')
-}
+};//end goToLoginPage
 
 
     render(){
@@ -21,7 +21,7 @@ goToLoginPage = () => {
                 <Grid container>
                     <Grid item xs={12}>
                         <Paper>
-                            test
+                            Welcome to Travel Tracker
                         </Paper>
                     </Grid>
                     <Grid item>
@@ -29,9 +29,9 @@ goToLoginPage = () => {
                     </Grid>
                 </Grid>
             </div>
-        )
-    }
-}
+        );//end return
+    };//end render
+};//end class
 
 const mapStateToProps = state => ({
     user: state.user,

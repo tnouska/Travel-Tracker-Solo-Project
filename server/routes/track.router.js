@@ -8,15 +8,15 @@ router.get('/', (req, res) => {
         let queryText = 'SELECT * FROM "track" WHERE person_id = $1 ORDER BY id ASC;';
         pool.query(queryText, [req.user.id]).then((result) => {
             res.send(result.rows);
-        })
+        })//end .then for query
             .catch((error) => {
                 console.log('error in track.router.get',error);
                 res.sendStatus(500);
-            });
+            });//end .catch for query
     } else {
         res.sendStatus(403)
-    }
-});
+    };//end if/else for if the user is Authenticated
+});//end track.router.get
 
 router.post('/', (req, res) => {
 if (req.isAuthenticated()) {  
@@ -66,10 +66,9 @@ router.delete('/:id', (req,res)=>{
             if (result.rowCount === 0) {
                 res.sendStatus(403);
                 console.log('cannot delete that item: ', result);
-                
             } else {
                 res.sendStatus(201);
-            };
+            };//end .then for query
         }).catch((error)=>{
             console.log('error in track.router.delete: ', error);
             res.sendStatus(500);

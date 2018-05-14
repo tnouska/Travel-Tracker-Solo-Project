@@ -10,5 +10,5 @@ const trackWaypoint = (state = [], action) => {
 };//end trackWaypoint reducer
 
 export default combineReducers({
-    trackWaypoint
+    trackWaypoint,
 })

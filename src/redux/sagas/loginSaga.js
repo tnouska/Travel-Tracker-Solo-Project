@@ -29,9 +29,9 @@ function* loginUser(action) {
         type: LOGIN_ACTIONS.LOGIN_FAILED_NO_CODE,
         message: error.message,
       });
-    }
-  }
-}
+    }//end if/else
+  }//end catch
+};//end loginUser
 
 // worker Saga: will be fired on "LOGOUT" actions
 function* logoutUser(action) {
@@ -42,8 +42,8 @@ function* logoutUser(action) {
     });
   } catch (error) {
     console.log('LOGOUT FAILED -- CHECK YOUR SERVER', error);
-  }
-}
+  };//end try/catch
+};//end logoutUser
 
 function* loginSaga() {
   yield takeLatest(LOGIN_ACTIONS.LOGIN, loginUser);

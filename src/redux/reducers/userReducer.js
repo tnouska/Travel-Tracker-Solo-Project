@@ -9,8 +9,8 @@ const userName = (state = null, action) => {
       return null;
     default:
       return state;
-  }
-};
+  }//end switch
+};//end userName reducer
 
 const isLoading = (state = false, action) => {
   switch (action.type) {
@@ -20,8 +20,8 @@ const isLoading = (state = false, action) => {
       return false;
     default:
       return state;
-  }
-};
+  }//end switch
+};//end isLoading reducer
 
 export default combineReducers({
   userName,

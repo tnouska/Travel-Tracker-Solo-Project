@@ -22,25 +22,10 @@ function* fetchUser() {
       type: USER_ACTIONS.USER_FETCH_FAILED,
       message: error.data || "FORBIDDEN",
     });
-  }
-}
-/*
-  Starts fetchUser on each dispatched `FETCH_USER` action.
-  Allows concurrent fetches of user.
-*/
-// function* userSaga() {
-//   yield takeEvery('FETCH_USER', fetchUser);
-// }
-
-/*
-  Alternatively you may use takeLatest.
-
-  Does not allow concurrent fetches of user. If "FETCH_USER" gets
-  dispatched while a fetch is already pending, that pending fetch is cancelled
-  and only the latest one will be run.
-*/
+  };//end try/catch
+};//end fetchUser
 function* userSaga() {
   yield takeLatest(USER_ACTIONS.FETCH_USER, fetchUser);
-}
+};//end userSaga
 
 export default userSaga;

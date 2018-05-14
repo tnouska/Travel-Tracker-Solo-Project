@@ -9,7 +9,7 @@ import Button from 'material-ui/Button'
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
-});
+});//end mapStateToProps
 
 class LoginPage extends Component {
   constructor(props) {
@@ -18,19 +18,19 @@ class LoginPage extends Component {
     this.state = {
       username: '',
       password: '',
-    };
-  }
+    };//end this.state
+  };//end LoginPage constructor
 
   componentDidMount() {
     this.props.dispatch(clearError());
     this.props.dispatch(triggerLogout());
-  }
+  };//end componentDidMount
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.userName) {
       this.props.history.push('/track');
-    }
-  }
+    }//end if 
+  };//end componentWillReceiveProps
 
   login = (event) => {
     event.preventDefault();
@@ -39,36 +39,40 @@ class LoginPage extends Component {
       this.props.dispatch(formError());
     } else {
       this.props.dispatch(triggerLogin(this.state.username, this.state.password));
-    }
-  }
+    };//end if/else
+  };//end login
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
       [propertyName]: event.target.value,
-    });
-  }
+    });//end this.setState
+  };//end handleInputChangeFor
+
   goToRegisterPage = () => {
     this.props.history.push('Register')
-  }
+  };//end goToRegisterPage
 
   renderAlert() {
     if (this.props.login.message !== '') {
       return (
+        <Grid item xs={12} zeroMinWidth>
         <h2
           className="alert"
           role="alert"
         >
           { this.props.login.message }
         </h2>
+        </Grid>
       );
     }
     return (<span />);
-  }
+  };//end renderAlert
 
   render() {
     return (
-      <div>
+      <Grid container direction="row" justify="center" alignItems="flex-start">
         { this.renderAlert() }
+        <Grid item xs={12} zeroMinWidth>
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>
@@ -98,9 +102,10 @@ class LoginPage extends Component {
             <Button onClick={this.goToRegisterPage}>Register</Button>
           </div>
         </form>
-      </div>
-    );
-  }
-}
+        </Grid>
+      </Grid>
+    );//end return
+  };//end render
+};//end class
 
 export default connect(mapStateToProps)(LoginPage);

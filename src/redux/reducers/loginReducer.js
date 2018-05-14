@@ -13,8 +13,8 @@ const message = (state = '', action) => {
       return action.payload;
     default:
       return state;
-  }
-};
+  }//end switch
+};//end message reducer
 
 const isLoading = (state = false, action) => {
   switch (action.type) {
@@ -24,8 +24,8 @@ const isLoading = (state = false, action) => {
       return false;
     default:
       return state;
-  }
-};
+  }//end switch
+};//end isLoading reducer
 
 export default combineReducers({
   isLoading,
