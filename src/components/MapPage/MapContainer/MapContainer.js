@@ -89,7 +89,7 @@ export class MapContainer extends Component {
                 />
             </Map>
         )//end return
-    };//end if/else
+    }//end if/else
     };//end render
 };//end class
 const mapStateToProps = state => ({
